@@ -24,7 +24,7 @@
 它不是简单罗列热门景点，而是先研究景点开放条件、空间位置和交通关系，再按城市片区组织行程，尽量减少跨城折返和无效通勤。最终计划还会通过 Schema、证据、路线、强度、预算与返程检查，降低 Agent “看起来规划好了，实际上无法执行”的风险。✅
 
 <p align="center">
-  <img src="./assets/readme/travelpilot-luoyang-overview.png" width="680" alt="TravelPilot 生成的洛阳三日旅行攻略视觉示例">
+  <img src="./assets/readme/travelpilot-luoyang-overview.png" width="520" alt="TravelPilot 生成的洛阳三日旅行攻略视觉示例">
 </p>
 
 <p align="center"><sub>🎨 AI 行程视觉示例：用于直观展示路线与每日重点；实际开放时间、票价、预约和交通信息仍以出行前核验结果为准。</sub></p>
@@ -64,7 +64,7 @@ flowchart LR
 ## 🖼️ 效果与目的地示例
 
 <p align="center">
-  <img src="./assets/readme/longmen-grottoes.png" width="720" alt="洛阳龙门石窟实景">
+  <img src="./assets/readme/longmen-grottoes.png" width="560" alt="洛阳龙门石窟实景">
 </p>
 
 <p align="center"><strong>🏛️ 龙门石窟｜文化遗产与城市核心景点示例</strong></p>
@@ -72,12 +72,12 @@ flowchart LR
 <table>
   <tr>
     <td align="center" valign="top" width="50%">
-      <img src="./assets/readme/laojun-mountain.png" width="300" alt="洛阳老君山实景"><br>
+      <img src="./assets/readme/laojun-mountain.png" width="230" alt="洛阳老君山实景"><br>
       <strong>⛰️ 老君山</strong><br>
       <sub>郊区山岳场景：需重点检查往返交通、天气、索道与体力强度</sub>
     </td>
     <td align="center" valign="top" width="50%">
-      <img src="./assets/readme/shaolin-temple.png" width="300" alt="少林寺牌坊实景"><br>
+      <img src="./assets/readme/shaolin-temple.png" width="230" alt="少林寺牌坊实景"><br>
       <strong>🥋 少林寺</strong><br>
       <sub>跨区域场景：需评估是否适合与洛阳行程组合及当天返程时间</sub>
     </td>
