@@ -149,6 +149,6 @@ python release/check_release.py --root . --archive travel-planner-skill-v2.1.0.z
 
 ## 8. 许可证与致谢
 
-当前恢复后的仓库尚未包含正式 `LICENSE`。正式公开前必须选择并添加许可证；推荐根据项目目标选择 MIT 或 Apache License 2.0。在添加许可证之前，公开代码不会自动获得自由复制、修改和再分发授权。
+当前恢复后的仓库标选择 MIT License 2.0。公开代码自动获得自由复制、修改和再分发授权。
 
 感谢高德开放平台、Open-Meteo、OpenStreetMap Nominatim、Python 与 JSON Schema 生态，以及推动 Agent Skills 互操作的工具与社区。外部服务仍受各自使用条款约束。
