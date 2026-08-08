@@ -298,10 +298,10 @@ TravelPilot 使用机器可验证的质量门约束旅行方案，而不是只�
 
 感谢以下项目、平台与社区提供的数据接口、工具和实践参考：
 
-- 🌦️ [Open-Meteo](https://open-meteo.com/)：免密钥天气数据；
-- 🗺️ 高德开放平台与 OpenStreetMap Nominatim：可选地理编码及路线能力；
-- 🐍 Python 与 JSON Schema 生态；
-- 🤝 推动 Agent Skills 开放与互操作的开发者社区。
+🌦️ **天气数据：** [Open-Meteo](https://open-meteo.com/)：免密钥天气数据；  
+🗺️ **地图与地理编码：** 高德开放平台与 OpenStreetMap Nominatim：可选地理编码及路线能力；  
+🐍 **开发生态：** Python 与 JSON Schema 生态；  
+🤝 **社区支持：** 推动 Agent Skills 开放与互操作的开发者社区。  
 
 外部服务仍受各自的许可、配额和使用条款约束。景点图片及 AI 示例图用于项目功能展示；公开发布前请确保所使用图片拥有相应授权。
 
