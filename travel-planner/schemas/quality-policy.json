@@ -1,0 +1,72 @@
+{
+  "skill_version": "2.1.0",
+  "policy_version": "1.0",
+  "critical_claim_types": [
+    "opening_hours",
+    "ticket_price",
+    "reservation",
+    "closure_status",
+    "weather",
+    "transport",
+    "emergency"
+  ],
+  "official_source_types": [
+    "official",
+    "government",
+    "operator"
+  ],
+  "allowed_source_types_by_claim": {
+    "opening_hours": ["official", "government", "operator"],
+    "ticket_price": ["official", "government", "operator"],
+    "reservation": ["official", "government", "operator"],
+    "closure_status": ["official", "government", "operator"],
+    "weather": ["official_weather", "weather_api", "government"],
+    "transport": ["map", "transit_operator", "operator"],
+    "emergency": ["government", "official", "operator"]
+  },
+  "max_evidence_age_days": {
+    "opening_hours": 14,
+    "ticket_price": 30,
+    "reservation": 14,
+    "closure_status": 3,
+    "weather": 2,
+    "transport": 7,
+    "emergency": 90,
+    "hotel": 14,
+    "other": 30
+  },
+  "required_claims_per_scheduled_attraction": [
+    "opening_hours",
+    "ticket_price",
+    "reservation",
+    "closure_status"
+  ],
+  "intensity_limits": {
+    "light": {"visit_minutes": 300, "travel_minutes": 90, "stops": 3},
+    "normal": {"visit_minutes": 420, "travel_minutes": 120, "stops": 5},
+    "commando": {"visit_minutes": 540, "travel_minutes": 180, "stops": 7}
+  },
+  "weather_thresholds": {
+    "precipitation_probability": 70,
+    "wind_speed_kmh": 40,
+    "high_temperature_c": 35,
+    "low_temperature_c": -10
+  },
+  "minimum_return_buffer_minutes": {
+    "rail": 60,
+    "domestic_flight": 120,
+    "international_flight": 180,
+    "bus": 45,
+    "default": 90
+  },
+  "required_budget_categories": [
+    "lodging",
+    "food",
+    "local_transport",
+    "tickets",
+    "intercity_transport",
+    "contingency"
+  ],
+  "minimum_contingency_ratio": 0.1,
+  "minimum_passing_score": 80
+}

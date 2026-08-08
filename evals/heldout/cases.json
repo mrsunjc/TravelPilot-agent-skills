@@ -1,0 +1,11 @@
+{
+  "suite_id": "travel-planner-heldout",
+  "suite_version": "2.1-recovered",
+  "cases": [
+    {"id": "missing-route-leg", "mutation": "route_missing", "expected_passed": false, "expected_codes": ["ROUTE_LEG_MISSING"]},
+    {"id": "community-used-as-official", "mutation": "community_authority", "expected_passed": false, "expected_codes": ["EVIDENCE_SOURCE_AUTHORITY_LOW"]},
+    {"id": "stale-closure-source", "mutation": "stale_closure", "expected_passed": false, "expected_codes": ["EVIDENCE_STALE"]},
+    {"id": "sensitive-field", "mutation": "sensitive_field", "expected_passed": false, "expected_codes": ["SECURITY_SENSITIVE_FIELD"]},
+    {"id": "return-buffer-low", "mutation": "return_buffer", "expected_passed": false, "expected_codes": ["RETURN_BUFFER_LOW"]}
+  ]
+}

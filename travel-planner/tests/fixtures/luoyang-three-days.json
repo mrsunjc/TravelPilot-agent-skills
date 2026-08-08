@@ -1,0 +1,109 @@
+{
+  "destination": "洛阳",
+  "days": 3,
+  "intensity": "normal",
+  "party": {
+    "size": 2,
+    "type": "adults"
+  },
+  "lodging": {
+    "id": "lodging-old-city",
+    "name": "老城与地铁沿线住宿区域（测试锚点）",
+    "lat": 34.679,
+    "lon": 112.474,
+    "zone": "老城"
+  },
+  "departure_anchor": {
+    "id": "luoyang-station",
+    "name": "洛阳站（测试锚点）",
+    "lat": 34.686,
+    "lon": 112.436,
+    "zone": "城中"
+  },
+  "attractions": [
+    {
+      "id": "longmen-grottoes",
+      "name": "龙门石窟",
+      "lat": 34.556,
+      "lon": 112.473,
+      "zone": "城南",
+      "priority": "must",
+      "duration_minutes": 240,
+      "time_preference": "morning",
+      "mandatory": true
+    },
+    {
+      "id": "luoyang-museum",
+      "name": "洛阳博物馆",
+      "lat": 34.654,
+      "lon": 112.423,
+      "zone": "新城",
+      "priority": "must",
+      "duration_minutes": 180,
+      "time_preference": "morning",
+      "mandatory": true
+    },
+    {
+      "id": "white-horse-temple",
+      "name": "白马寺",
+      "lat": 34.721,
+      "lon": 112.607,
+      "zone": "城东",
+      "priority": "recommended",
+      "duration_minutes": 150,
+      "time_preference": "morning"
+    },
+    {
+      "id": "old-city-street",
+      "name": "洛阳老城历史街区",
+      "lat": 34.684,
+      "lon": 112.482,
+      "zone": "老城",
+      "priority": "must",
+      "duration_minutes": 120,
+      "time_preference": "afternoon",
+      "mandatory": true
+    },
+    {
+      "id": "yingtian-gate",
+      "name": "应天门夜景",
+      "lat": 34.675,
+      "lon": 112.463,
+      "zone": "老城",
+      "priority": "recommended",
+      "duration_minutes": 90,
+      "time_preference": "evening",
+      "night": true
+    },
+    {
+      "id": "luoyi-ancient-city",
+      "name": "洛邑古城",
+      "lat": 34.681,
+      "lon": 112.492,
+      "zone": "老城",
+      "priority": "recommended",
+      "duration_minutes": 90,
+      "time_preference": "evening"
+    },
+    {
+      "id": "sui-tang-site-park",
+      "name": "隋唐城遗址公园",
+      "lat": 34.660,
+      "lon": 112.435,
+      "zone": "新城",
+      "priority": "optional",
+      "duration_minutes": 90,
+      "time_preference": "afternoon"
+    },
+    {
+      "id": "excluded-stop",
+      "name": "用户明确排除的测试景点",
+      "lat": 34.700,
+      "lon": 112.520,
+      "zone": "城东",
+      "priority": "optional",
+      "duration_minutes": 120,
+      "excluded": true
+    }
+  ]
+}

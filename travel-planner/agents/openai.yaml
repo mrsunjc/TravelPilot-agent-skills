@@ -1,0 +1,4 @@
+interface:
+  display_name: "智能旅行规划助手"
+  short_description: "输入目的地和天数，生成经质量门校验的旅行方案与可视化行程图"
+  default_prompt: "使用 $travel-planner 为我规划洛阳三天旅行，运行证据、路线和返程质量检查，并生成 SVG 行程信息图。"

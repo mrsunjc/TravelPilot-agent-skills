@@ -1,0 +1,12 @@
+{
+  "suite_id": "travel-planner-gold",
+  "suite_version": "2.1-recovered",
+  "cases": [
+    {"id": "valid-plan", "mutation": "valid", "expected_passed": true, "expected_codes": []},
+    {"id": "claim-without-evidence", "mutation": "missing_evidence", "expected_passed": false, "expected_codes": ["EVIDENCE_REQUIRED"]},
+    {"id": "budget-total-mismatch", "mutation": "budget_mismatch", "expected_passed": false, "expected_codes": ["BUDGET_TOTAL_MISMATCH"]},
+    {"id": "excluded-attraction-scheduled", "mutation": "excluded_scheduled", "expected_passed": false, "expected_codes": ["CONSTRAINT_EXCLUDED_SCHEDULED"]},
+    {"id": "schedule-overlap", "mutation": "overlap", "expected_passed": false, "expected_codes": ["SCHEDULE_OVERLAP"]},
+    {"id": "reservation-unknown", "mutation": "reservation_unknown", "expected_passed": false, "expected_codes": ["RESERVATION_STATUS_UNKNOWN"]}
+  ]
+}

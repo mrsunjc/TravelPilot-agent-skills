@@ -1,0 +1,297 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://travel-planner.local/schemas/final-plan-2.0.json",
+  "title": "Travel Planner Final Plan",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "plan_id",
+    "destination",
+    "generated_at",
+    "trip",
+    "user_constraints",
+    "attractions",
+    "itinerary",
+    "claims",
+    "evidence",
+    "lodging_recommendations",
+    "budget",
+    "backups",
+    "audit_context"
+  ],
+  "properties": {
+    "schema_version": {"const": "2.0"},
+    "plan_id": {"type": "string", "minLength": 1},
+    "destination": {"type": "string", "minLength": 1},
+    "generated_at": {"type": "string", "format": "date-time"},
+    "trip": {
+      "type": "object",
+      "required": ["days", "intensity", "party"],
+      "properties": {
+        "days": {"type": "integer", "minimum": 1, "maximum": 30},
+        "start_date": {"type": ["string", "null"], "format": "date"},
+        "intensity": {"enum": ["light", "normal", "commando"]},
+        "party": {
+          "type": "object",
+          "required": ["size", "types"],
+          "properties": {
+            "size": {"type": "integer", "minimum": 1},
+            "types": {"type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true}
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "user_constraints": {
+      "type": "object",
+      "required": ["must_go", "exclude"],
+      "properties": {
+        "must_go": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "exclude": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+      },
+      "additionalProperties": true
+    },
+    "attractions": {"type": "array", "items": {"$ref": "#/$defs/attraction"}},
+    "itinerary": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/day"}},
+    "claims": {"type": "array", "items": {"$ref": "#/$defs/claim"}},
+    "evidence": {"type": "array", "items": {"$ref": "#/$defs/evidence"}},
+    "lodging_recommendations": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/lodging"}},
+    "weather": {"type": "array", "items": {"$ref": "#/$defs/weather"}},
+    "budget": {"$ref": "#/$defs/budget"},
+    "backups": {"type": "array", "items": {"$ref": "#/$defs/backup"}},
+    "emergency": {"type": "array", "items": {"$ref": "#/$defs/emergency"}},
+    "audit_context": {"$ref": "#/$defs/auditContext"}
+  },
+  "additionalProperties": true,
+  "$defs": {
+    "attraction": {
+      "type": "object",
+      "required": ["id", "name", "zone", "priority", "duration_minutes", "outdoor", "opening_windows", "closed_dates", "reservation", "claim_ids"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "name": {"type": "string", "minLength": 1},
+        "zone": {"type": "string", "minLength": 1},
+        "priority": {"enum": ["must", "recommended", "optional"]},
+        "duration_minutes": {"type": "integer", "minimum": 1},
+        "outdoor": {"type": "boolean"},
+        "opening_windows": {"type": "array", "items": {"$ref": "#/$defs/openingWindow"}},
+        "closed_dates": {"type": "array", "items": {"type": "string", "format": "date"}, "uniqueItems": true},
+        "reservation": {
+          "type": "object",
+          "required": ["required", "status"],
+          "properties": {
+            "required": {"type": "boolean"},
+            "status": {"enum": ["booked", "to_book", "not_required", "unknown"]},
+            "deadline": {"type": ["string", "null"], "format": "date-time"}
+          },
+          "additionalProperties": true
+        },
+        "claim_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+      },
+      "additionalProperties": true
+    },
+    "openingWindow": {
+      "type": "object",
+      "required": ["open", "close"],
+      "properties": {
+        "weekdays": {"type": "array", "items": {"type": "integer", "minimum": 1, "maximum": 7}, "uniqueItems": true},
+        "dates": {"type": "array", "items": {"type": "string", "format": "date"}, "uniqueItems": true},
+        "open": {"type": "string", "format": "time"},
+        "close": {"type": "string", "format": "time"},
+        "last_entry": {"type": ["string", "null"], "format": "time"}
+      },
+      "additionalProperties": true
+    },
+    "stop": {
+      "type": "object",
+      "required": ["id", "name", "kind", "zone", "arrival_time", "departure_time", "duration_minutes"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "name": {"type": "string", "minLength": 1},
+        "kind": {"enum": ["attraction", "meal", "rest", "hotel", "hub", "other"]},
+        "attraction_id": {"type": "string"},
+        "zone": {"type": "string", "minLength": 1},
+        "arrival_time": {"type": "string", "format": "time"},
+        "departure_time": {"type": "string", "format": "time"},
+        "duration_minutes": {"type": "integer", "minimum": 0},
+        "reservation_status": {"enum": ["booked", "to_book", "not_required", "unknown"]},
+        "backup_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+      },
+      "additionalProperties": true
+    },
+    "leg": {
+      "type": "object",
+      "required": ["from", "to", "minutes", "mode", "verified", "evidence_ids"],
+      "properties": {
+        "from": {"type": "string", "minLength": 1},
+        "to": {"type": "string", "minLength": 1},
+        "minutes": {"type": "integer", "minimum": 0},
+        "distance_km": {"type": ["number", "null"], "minimum": 0},
+        "mode": {"type": "string", "minLength": 1},
+        "cost": {"type": ["number", "null"], "minimum": 0},
+        "currency": {"type": ["string", "null"]},
+        "verified": {"type": "boolean"},
+        "evidence_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+      },
+      "additionalProperties": true
+    },
+    "day": {
+      "type": "object",
+      "required": ["day", "date", "zone_focus", "stops", "legs", "backup_ids"],
+      "properties": {
+        "day": {"type": "integer", "minimum": 1},
+        "date": {"type": ["string", "null"], "format": "date"},
+        "zone_focus": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "stops": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/stop"}},
+        "legs": {"type": "array", "items": {"$ref": "#/$defs/leg"}},
+        "backup_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+      },
+      "additionalProperties": true
+    },
+    "claim": {
+      "type": "object",
+      "required": ["id", "subject_id", "type", "value", "status", "evidence_ids"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "subject_id": {"type": "string", "minLength": 1},
+        "type": {"enum": ["opening_hours", "ticket_price", "reservation", "closure_status", "weather", "transport", "emergency", "hotel", "other"]},
+        "value": {},
+        "status": {"enum": ["verified", "estimated", "unverified"]},
+        "as_of": {"type": ["string", "null"], "format": "date-time"},
+        "method": {"type": ["string", "null"]},
+        "evidence_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+      },
+      "additionalProperties": true
+    },
+    "evidence": {
+      "type": "object",
+      "required": ["id", "url", "title", "publisher", "source_type", "accessed_at", "supports"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "url": {"type": "string", "format": "uri"},
+        "title": {"type": "string", "minLength": 1},
+        "publisher": {"type": "string", "minLength": 1},
+        "source_type": {"enum": ["official", "government", "operator", "official_weather", "weather_api", "map", "transit_operator", "platform", "community", "other"]},
+        "accessed_at": {"type": "string", "format": "date-time"},
+        "published_at": {"type": ["string", "null"], "format": "date-time"},
+        "supports": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["claim_id", "value_digest"],
+            "properties": {
+              "claim_id": {"type": "string", "minLength": 1},
+              "value_digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "lodging": {
+      "type": "object",
+      "required": ["area", "why", "tradeoffs"],
+      "properties": {
+        "area": {"type": "string", "minLength": 1},
+        "why": {"type": "string", "minLength": 1},
+        "tradeoffs": {"type": "string", "minLength": 1},
+        "claim_ids": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": true
+    },
+    "weather": {
+      "type": "object",
+      "required": ["date", "precipitation_probability", "wind_speed_kmh", "temp_min_c", "temp_max_c", "evidence_ids"],
+      "properties": {
+        "date": {"type": "string", "format": "date"},
+        "precipitation_probability": {"type": "number", "minimum": 0, "maximum": 100},
+        "wind_speed_kmh": {"type": "number", "minimum": 0},
+        "temp_min_c": {"type": "number"},
+        "temp_max_c": {"type": "number"},
+        "weather_code": {"type": ["integer", "null"]},
+        "evidence_ids": {"type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true}
+      },
+      "additionalProperties": true
+    },
+    "budgetRange": {
+      "type": "object",
+      "required": ["name", "min", "max", "status"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "min": {"type": "number", "minimum": 0},
+        "max": {"type": "number", "minimum": 0},
+        "status": {"enum": ["verified", "estimated", "unverified"]},
+        "evidence_ids": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": true
+    },
+    "budget": {
+      "type": "object",
+      "required": ["currency", "travelers", "nights", "categories", "total"],
+      "properties": {
+        "currency": {"type": "string", "minLength": 3},
+        "travelers": {"type": "integer", "minimum": 1},
+        "nights": {"type": "integer", "minimum": 0},
+        "categories": {"type": "array", "items": {"$ref": "#/$defs/budgetRange"}},
+        "total": {
+          "type": "object",
+          "required": ["min", "max"],
+          "properties": {
+            "min": {"type": "number", "minimum": 0},
+            "max": {"type": "number", "minimum": 0}
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": true
+    },
+    "backup": {
+      "type": "object",
+      "required": ["id", "trigger", "replacement_for", "zone", "action"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "trigger": {"type": "string", "minLength": 1},
+        "replacement_for": {"type": "array", "items": {"type": "string"}},
+        "zone": {"type": "string", "minLength": 1},
+        "action": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": true
+    },
+    "emergency": {
+      "type": "object",
+      "required": ["type", "name", "evidence_ids"],
+      "properties": {
+        "type": {"type": "string", "minLength": 1},
+        "name": {"type": "string", "minLength": 1},
+        "phone": {"type": ["string", "null"]},
+        "address": {"type": ["string", "null"]},
+        "evidence_ids": {"type": "array", "items": {"type": "string"}, "minItems": 1}
+      },
+      "additionalProperties": true
+    },
+    "auditContext": {
+      "type": "object",
+      "required": ["assumptions"],
+      "properties": {
+        "assumptions": {"type": "array", "items": {"type": "string"}},
+        "return_plan": {
+          "type": ["object", "null"],
+          "properties": {
+            "departure_time": {"type": "string", "format": "time"},
+            "transport_kind": {"enum": ["rail", "domestic_flight", "international_flight", "bus", "other"]},
+            "hub_id": {"type": "string"},
+            "final_activity_end": {"type": "string", "format": "time"},
+            "final_leg_minutes": {"type": "integer", "minimum": 0},
+            "luggage_pickup_minutes": {"type": "integer", "minimum": 0},
+            "required_buffer_minutes": {"type": "integer", "minimum": 0}
+          },
+          "required": ["departure_time", "transport_kind", "hub_id", "final_activity_end", "final_leg_minutes", "luggage_pickup_minutes"],
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}
